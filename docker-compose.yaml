@@ -1,0 +1,19 @@
+version: "3.7"
+ 
+services:
+ 
+  # Database
+  db:
+    image: mysql
+    restart: unless-stopped # always
+    ports:
+      - "3306:3306"
+    # volumes: # para persistir os dados do banco de dados
+      # - ./.docker-dev/mysql/dbdata:/var/lib/mysql
+    environment: # variáveis de ambiente do MySQL
+      MYSQL_DATABASE: ${DB_DATABASE} # Esse valor (nome do banco de dados) vem do .env
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD} # Esse valor (senha do usuário root) vem do .env
+      MYSQL_PASSWORD: ${DB_PASSWORD} # Esse valor (senha do usuário acima) vem do .env
+      # MYSQL_USER: ${DB_USERNAME} # Esse valor (usuário) vem do .env
+    container_name: db
+ 
